@@ -1,0 +1,12 @@
+dist/
+node_modules/
+.astro/
+public/
+*.md
+*.mdx
+.vercel
+.netlify
+.wrangler
+coverage/
+*.log
+.DS_Store

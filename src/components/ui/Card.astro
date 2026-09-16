@@ -1,0 +1,15 @@
+---
+interface Props {
+  class?: string;
+  children: ReturnType<typeof Astro.slots.render>;
+  hover?: boolean;
+}
+const { class: className = '', children, hover = true } = Astro.props;
+const classes = `glass ${hover ? 'hover-lift' : ''} ${className}`;
+---
+<div class={classes}>
+  <slot>{children}</slot>
+</div>
+<style>
+  /* Base glass styles in global.css, hover-lift adds transform on hover */
+</style>

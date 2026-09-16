@@ -1,0 +1,231 @@
+---
+import Base from '../layouts/Base.astro';
+import HeroEyebrow from '../components/ui/HeroEyebrow.astro';
+import TrustedBy from '../components/ui/TrustedBy.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import StatCard from '../components/ui/StatCard.astro';
+import SolutionCard from '../components/ui/SolutionCard.astro';
+import TestimonialCard from '../components/ui/TestimonialCard.astro';
+import PricingCard from '../components/ui/PricingCard.astro';
+import CTA from '../components/ui/CTA.astro';
+import ThreeHero from '../components/three/ThreeHero.tsx';
+---
+
+<Base
+  title="TechNova | Universal Intelligence, Global Reach"
+  description="TechNova Systems is a worldwide leader in technology innovation, providing AI-driven solutions and infrastructure across 6 continents."
+  currentPath="/"
+>
+  <!-- Hero Section -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container hero-content reveal">
+      <HeroEyebrow text="Now live in 150+ cities worldwide" />
+      <h1 id="hero-title" class="gradient-text">
+        Redefining the Future
+        <br />
+        of <span id="typed-text">Universal Intelligence</span>
+        <span class="typed-cursor" aria-hidden="true"></span>
+      </h1>
+      <p class="subtitle">
+        Empowering industries worldwide with state-of-the-art AI, sustainable infrastructure, and
+        interconnected ecosystems that bridge continents.
+      </p>
+      <div class="hero-btns">
+        <a href="/solutions" class="btn btn-primary">Explore Solutions →</a>
+        <a href="/about" class="btn btn-glass">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-visual" id="three-canvas-container" aria-hidden="true">
+      <ThreeHero client:visible />
+    </div>
+  </section>
+
+  <!-- Trusted By -->
+  <TrustedBy />
+
+  <!-- Stats Section -->
+  <section id="global" class="stats-section" aria-labelledby="stats-title">
+    <div class="container">
+      <SectionHeader
+        tag="Our Impact"
+        title="Global Scale, Local Precision"
+        description="Numbers that define a generation of digital transformation."
+      />
+      <div class="grid-stats">
+        <StatCard icon="🌐" target={150} label="Global Cities" delay={1} />
+        <StatCard icon="⚡" target={99} label="Uptime %" delay={2} />
+        <StatCard icon="🔬" target={45} label="Innovation Patents" delay={3} />
+        <StatCard icon="👥" target={2} label="Million+ Users" delay={4} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Solutions Section -->
+  <section id="solutions" class="solutions" aria-labelledby="solutions-title">
+    <div class="container">
+      <SectionHeader
+        tag="What We Build"
+        title="Future-Ready Solutions"
+        description="Scalable technology designed to meet the demands of a global digital economy."
+      />
+      <div class="grid-solutions">
+        <SolutionCard
+          icon="☁️"
+          title="Universal Cloud"
+          description="A distributed network across 200+ edge locations, ensuring sub-10ms latency for users everywhere."
+          delay={1}
+        />
+        <SolutionCard
+          icon="🤖"
+          title="AI Core"
+          description="Enterprise-grade intelligence layer that automates complex workflows and predicts market shifts."
+          delay={2}
+        />
+        <SolutionCard
+          icon="🔐"
+          title="Quantum Link"
+          description="Next-generation secure communication protocols powered by quantum-resistant encryption."
+          delay={3}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials" aria-labelledby="testimonials-title">
+    <div class="container">
+      <SectionHeader
+        tag="Client Stories"
+        title="Trusted by Leaders"
+        description="Global enterprises rely on TechNova to run their critical infrastructure."
+      />
+      <div class="grid-testimonials">
+        <TestimonialCard
+          quote="TechNova's AI Core reduced our supply chain costs by 32% in under 6 months. The accuracy of their predictive models is unmatched in the industry."
+          author="Amara Khoury"
+          role="CTO, Global Logistics Group"
+          avatar="AK"
+          delay={1}
+        />
+        <TestimonialCard
+          quote="Switching to TechNova's Universal Cloud was the best infrastructure decision we've made. Zero downtime in 18 months and scale we never imagined possible."
+          author="James Merrell"
+          role="VP Engineering, FinStream"
+          avatar="JM"
+          delay={2}
+        />
+        <TestimonialCard
+          quote="Quantum Link's security suite gave us the confidence to expand into 12 new markets. Their compliance coverage is extraordinary."
+          author="Sofia Landon"
+          role="CISO, MedCore International"
+          avatar="SL"
+          delay={3}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" aria-labelledby="pricing-title">
+    <div class="container">
+      <SectionHeader
+        tag="Pricing"
+        title="Simple, Transparent Plans"
+        description="No hidden fees. Scale at any time. Enterprise SLAs included."
+      />
+      <div class="pricing-grid">
+        <PricingCard
+          name="Starter"
+          price="$499"
+          period="/ month"
+          features={[
+            'Up to 10 users',
+            '5 TB Cloud Storage',
+            'AI Core Basic',
+            '99.9% SLA',
+            'Email Support'
+          ]}
+          ctaText="Get Started"
+          ctaHref="/contact"
+          ctaVariant="outline"
+          delay={1}
+        />
+        <PricingCard
+          name="Enterprise"
+          price="$2,499"
+          period="/ month"
+          features={[
+            'Unlimited users',
+            '100 TB Cloud Storage',
+            'AI Core Full Suite',
+            '99.99% SLA',
+            'Quantum Link Security',
+            '24/7 Dedicated Support'
+          ]}
+          ctaText="Get Started →"
+          ctaHref="/contact"
+          ctaVariant="primary"
+          featured={true}
+          delay={2}
+        />
+        <PricingCard
+          name="Global"
+          price="Custom"
+          period="/ tailored"
+          features={[
+            'Private cloud clusters',
+            'Custom AI training',
+            'Multi-region failover',
+            '100% SLA guaranteed',
+            'Dedicated architect'
+          ]}
+          ctaText="Contact Sales"
+          ctaHref="/contact"
+          ctaVariant="outline"
+          delay={3}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Innovation Section -->
+  <section
+    id="innovation"
+    class="innovation"
+    style="background: var(--color-bg-alt);"
+    aria-labelledby="innovation-title"
+  >
+    <div class="container reveal">
+      <SectionHeader
+        tag="R&D"
+        title="Pioneering Progress"
+        description="Our global R&D labs are pushing the boundaries of what is possible in the digital age."
+      />
+      <div class="glass innovation-box">
+        <h3>Worldwide Research Network</h3>
+        <p>
+          With flagship hubs in Tokyo, London, San Francisco, and Singapore, TechNova is always
+          awake, always innovating — 24 hours a day, 365 days a year.
+        </p>
+        <div class="hub-tags">
+          <span class="hub-tag">🗼 Tokyo</span>
+          <span class="hub-tag">🎡 London</span>
+          <span class="hub-tag">🌉 San Francisco</span>
+          <span class="hub-tag">🦁 Singapore</span>
+          <span class="hub-tag">🗽 New York</span>
+          <span class="hub-tag">🏛️ Berlin</span>
+        </div>
+        <a href="/about" class="btn btn-primary">Explore Our Labs →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Big CTA Section -->
+  <CTA
+    tag="Ready to Scale?"
+    title="The Infrastructure of Tomorrow, Today"
+    description="Join 2 million+ users and hundreds of global enterprises that trust TechNova to power their digital future."
+    primaryCTA={{ text: 'Request a Demo →', href: '/contact' }}
+    secondaryCTA={{ text: 'View All Solutions', href: '/solutions' }}
+  />
+</Base>

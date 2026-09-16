@@ -1,0 +1,22 @@
+---
+interface Props {
+  tag: string;
+  title: string;
+  description: string;
+  primaryCTA: { text: string; href: string };
+  secondaryCTA: { text: string; href: string };
+  class?: string;
+}
+const { tag, title, description, primaryCTA, secondaryCTA, class: className = '' } = Astro.props;
+---
+<section class={`cta-section ${className}`} aria-labelledby="cta-title">
+  <div class="container cta-box reveal">
+    <span class="tag">{tag}</span>
+    <h2 id="cta-title" class="gradient-text">{title}</h2>
+    <p>{description}</p>
+    <div class="cta-buttons">
+      <a href={primaryCTA.href} class="btn btn-primary">{primaryCTA.text}</a>
+      <a href={secondaryCTA.href} class="btn btn-glass">{secondaryCTA.text}</a>
+    </div>
+  </div>
+</section>

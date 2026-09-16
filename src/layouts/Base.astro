@@ -1,0 +1,92 @@
+---
+import '../styles/global.css';
+import Nav from '../components/ui/Nav.astro';
+import Footer from '../components/ui/Footer.astro';
+import LoadingScreen from '../components/ui/LoadingScreen.astro';
+import CursorGlow from '../components/ui/CursorGlow.astro';
+import SkipLink from '../components/ui/SkipLink.astro';
+import Analytics from '../components/ui/Analytics.astro';
+import StructuredData from '../components/ui/StructuredData.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  currentPath?: string;
+}
+const { title, description, currentPath = '/' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content={description || 'TechNova Systems - Universal Intelligence, Global Reach'}
+    />
+    <title>{title || "TechNova | Universal Intelligence, Global Reach"}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <!-- View Transitions API -->
+    <meta name="astro-view-transitions-enabled" content="true" />
+
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#3b82f6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="TechNova" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+    <!-- SEO -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="TechNova Systems" />
+    <meta property="og:title" content={title || "TechNova | Universal Intelligence, Global Reach"} />
+    <meta property="og:description" content={description || 'TechNova Systems - Universal Intelligence, Global Reach'} />
+    <meta property="og:image" content="/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@technova" />
+    <link rel="canonical" href={`https://technova.global${currentPath}`} />
+
+    <!-- Structured Data -->
+    <StructuredData type="Organization" data={{}} />
+    <StructuredData type="WebSite" data={{}} />
+  </head>
+  <body>
+    <!-- Skip Link for Accessibility -->
+    <SkipLink />
+
+    <!-- Loading Screen -->
+    <LoadingScreen />
+
+    <!-- Cursor Glow -->
+    <CursorGlow />
+
+    <!-- Navigation -->
+    <Nav currentPath={currentPath} />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer currentPath={currentPath} />
+
+    <!-- Analytics -->
+    <Analytics />
+
+    <!-- Service Worker Registration -->
+    <script is:inline>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
+
+    <script src="/scripts/main.js" is:inline></script>
+  </body>
+</html>

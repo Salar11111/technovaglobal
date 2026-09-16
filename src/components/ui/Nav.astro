@@ -1,0 +1,41 @@
+---
+import ThemeToggle from '../ui/ThemeToggle.tsx';
+interface Props {
+  currentPath?: string;
+}
+const { currentPath = '/' } = Astro.props;
+const navLinks = [
+  { href: '/solutions', label: 'Solutions' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+---
+<nav id="navbar" class="nav">
+  <div class="container nav-content">
+    <a href="/" class="logo" aria-label="TechNova Home">TECH<span>NOVA</span></a>
+    <div class="nav-links">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={currentPath === link.href || (currentPath !== '/' && currentPath.startsWith(link.href)) ? 'active' : ''}
+          aria-current={currentPath === link.href || (currentPath !== '/' && currentPath.startsWith(link.href)) ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </div>
+    <a href="/contact" class="btn btn-primary">Get Started</a>
+    <ThemeToggle client:visible />
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav Overlay -->
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  {navLinks.map(link => (
+    <a href={link.href} class={currentPath === link.href ? 'active' : ''}>{link.label}</a>
+  ))}
+  <a href="/contact" class="btn btn-primary" style="margin-top:1rem;">Get Started</a>
+</div>

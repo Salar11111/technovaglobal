@@ -1,0 +1,23 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  role: string;
+  avatar: string;
+  delay?: number;
+  class?: string;
+}
+const { quote, author, role, avatar, delay = 0, class: className = '' } = Astro.props;
+const delayClass = delay ? `reveal-delay-${delay}` : '';
+---
+<div class={`testimonial-card glass reveal ${delayClass} ${className}`}>
+  <div class="quote-mark" aria-hidden="true">"</div>
+  <p>{quote}</p>
+  <div class="testimonial-author">
+    <div class="author-avatar" aria-hidden="true">{avatar}</div>
+    <div>
+      <div class="author-name">{author}</div>
+      <div class="author-role">{role}</div>
+    </div>
+  </div>
+</div>

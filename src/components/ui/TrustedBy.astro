@@ -1,0 +1,14 @@
+---
+interface Props {
+  brands?: string[];
+}
+const { brands = ['Microsoft', 'Alphabet', 'Siemens', 'Airbus', 'Samsung', 'Hitachi'] } = Astro.props;
+---
+<div class="trusted-by" aria-label="Trusted by industry leaders">
+  <div class="container trusted-by-inner">
+    <p>Trusted by</p>
+    <div class="brand-logos">
+      {brands.map(brand => <span class="brand-name">{brand}</span>)}
+    </div>
+  </div>
+</div>

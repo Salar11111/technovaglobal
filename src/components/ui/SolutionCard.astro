@@ -1,0 +1,22 @@
+---
+interface Props {
+  icon: string;
+  title: string;
+  description: string;
+  features?: string[];
+  delay?: number;
+  class?: string;
+}
+const { icon, title, description, features = [], delay = 0, class: className = '' } = Astro.props;
+const delayClass = delay ? `reveal-delay-${delay}` : '';
+---
+<div class={`solution-card glass reveal ${delayClass} ${className}`}>
+  <span class="card-icon" aria-hidden="true">{icon}</span>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  {features.length > 0 && (
+    <ul class="solution-features">
+      {features.map(feature => <li><span aria-hidden="true">✓</span> {feature}</li>)}
+    </ul>
+  )}
+</div>

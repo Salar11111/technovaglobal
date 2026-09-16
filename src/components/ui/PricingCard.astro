@@ -1,0 +1,31 @@
+---
+interface Props {
+  name: string;
+  price: string;
+  period: string;
+  features: string[];
+  ctaText: string;
+  ctaHref: string;
+  ctaVariant?: 'primary' | 'outline';
+  featured?: boolean;
+  delay?: number;
+  class?: string;
+}
+const { name, price, period, features, ctaText, ctaHref, ctaVariant = 'outline', featured = false, delay = 0, class: className = '' } = Astro.props;
+const delayClass = delay ? `reveal-delay-${delay}` : '';
+const featuredClass = featured ? 'featured' : '';
+---
+<div class={`pricing-card glass ${featuredClass} reveal ${delayClass} ${className}`}>
+  {featured && <span class="popular-badge">Most Popular</span>}
+  <p class="plan-name">{name}</p>
+  <div class="pricing-price">
+    <span class="price-amount gradient-text">{price}</span>
+    <span class="price-period">{period}</span>
+  </div>
+  <ul class="pricing-features">
+    {features.map(feature => <li>{feature}</li>)}
+  </ul>
+  <a href={ctaHref} class={`btn btn-${ctaVariant}`} style="width:100%; justify-content:center;">
+    {ctaText}
+  </a>
+</div>

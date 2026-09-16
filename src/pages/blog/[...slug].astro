@@ -1,0 +1,104 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.id },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const postEntry = await getEntry('blog', post.id);
+if (!postEntry) throw new Error('Post not found');
+const { Content } = await render(postEntry);
+---
+
+<Base
+  title={`${post.data.title} | TechNova Systems`}
+  description={post.data.description}
+  currentPath="/blog"
+>
+  <article class="blog-post">
+    <header class="blog-header">
+      <div class="container">
+        <span class="tag">{post.data.tags[0]}</span>
+        <h1 class="gradient-text">{post.data.title}</h1>
+        <div class="blog-meta">
+          <time>{post.data.publishDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</time>
+          <span class="blog-author">by {post.data.author}</span>
+          <span class="blog-read-time">{postEntry?.body ? Math.ceil(postEntry.body.length / 1000) : 5} min read</span>
+        </div>
+        <div class="blog-tags">
+          {post.data.tags.map(tag => <span class="tag">{tag}</span>)}
+        </div>
+      </div>
+    </header>
+
+    <div class="container blog-body">
+      <Content />
+    </div>
+  </article>
+
+  <style>
+    .blog-post { padding: var(--space-32) 0; }
+    .blog-header { margin-bottom: 4rem; }
+    .blog-header .tag { margin-bottom: 1.5rem; }
+    .blog-header h1 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; }
+    .blog-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .blog-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .blog-body {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .blog-body h2 { margin-top: 3rem; margin-bottom: 1.5rem; }
+    .blog-body h3 { margin-top: 2.5rem; margin-bottom: 1rem; }
+    .blog-body p { margin-bottom: 1.5rem; line-height: 1.8; }
+    .blog-body code {
+      background: rgba(59, 130, 246, 0.1);
+      padding: 0.2em 0.4em;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+    }
+    .blog-body pre {
+      background: #070710;
+      border: 1px solid var(--color-glass-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      overflow-x: auto;
+      margin: 2rem 0;
+    }
+    .blog-body pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+    .blog-body ul, .blog-body ol { margin: 1.5rem 0; padding-left: 2rem; }
+    .blog-body li { margin-bottom: 0.5rem; }
+    .blog-body table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+    .blog-body th, .blog-body td {
+      border: 1px solid var(--color-glass-border);
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+    .blog-body th { background: rgba(59, 130, 246, 0.1); }
+    .blog-body blockquote {
+      border-left: 4px solid var(--color-primary);
+      padding-left: 1.5rem;
+      margin: 2rem 0;
+      color: var(--color-text-dim);
+      font-style: italic;
+    }
+    .blog-body a { color: var(--color-primary); text-decoration: underline; }
+  </style>
+</Base>

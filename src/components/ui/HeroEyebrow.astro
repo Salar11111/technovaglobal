@@ -1,0 +1,10 @@
+---
+interface Props {
+  text: string;
+  class?: string;
+}
+const { text, class: className = '' } = Astro.props;
+---
+<div class={`hero-eyebrow ${className}`} aria-label="Live status">
+  <span class="dot" aria-hidden="true"></span> {text}
+</div>

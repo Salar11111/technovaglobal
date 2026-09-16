@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import SolutionCard from '../components/ui/SolutionCard.astro';
+import CTA from '../components/ui/CTA.astro';
+---
+
+<Base
+  title="Solutions | TechNova Systems"
+  description="Explore TechNova's suite of next-generation digital solutions: Universal Cloud, AI Core, and Quantum Link Security."
+  currentPath="/solutions"
+>
+  <section
+    class="hero"
+    style="min-height: 55vh; padding-top: 150px;"
+    aria-labelledby="solutions-hero-title"
+  >
+    <div class="container reveal">
+      <span class="tag">Our Products</span>
+      <h1 id="solutions-hero-title" class="gradient-text">
+        Technological
+        <br />
+        <span>Excellence</span>
+      </h1>
+      <p class="subtitle">
+        Explore our suite of next-generation digital solutions designed for the global enterprise.
+      </p>
+    </div>
+  </section>
+
+  <section class="solutions-detail" aria-labelledby="solutions-detail-title">
+    <div class="container">
+      <SectionHeader
+        tag="Product Suite"
+        title="Three Pillars of Innovation"
+        description="Each product engineered for enterprise scale from day one."
+      />
+      <div class="grid-solutions">
+        <SolutionCard
+          icon="☁️"
+          title="Universal Cloud Infrastructure"
+          description="Distributed edge computing that puts your data where your users are. Our network spans 200+ cities with redundant clusters for 100% reliability."
+          features={[
+            'Zero-latency synchronization',
+            'Adaptive resource scaling',
+            'Global compliance standards'
+          ]}
+          delay={1}
+        />
+        <SolutionCard
+          icon="🤖"
+          title="AI Core Intelligence"
+          description="Our proprietary neural networks don't just process data—they understand intent. Automate entire sectors of your business with absolute precision."
+          features={[
+            'Predictive market modeling',
+            'Natural language automation',
+            'Computer vision for logistics'
+          ]}
+          delay={2}
+        />
+        <SolutionCard
+          icon="🔐"
+          title="Quantum Link Security"
+          description="Stay ahead of modern threats with encryption that survives the quantum age. Secure your global communications with impossible-to-crack protocols."
+          features={[
+            'Post-quantum cryptography',
+            'Encrypted global backbone',
+            'Real-time threat detection'
+          ]}
+          delay={3}
+        />
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    tag="Enterprise Ready"
+    title="Ready for Deep Integration?"
+    description="Speak with our infrastructure architects today to design your custom global ecosystem."
+    primaryCTA={{ text: 'Request Consultation →', href: '/contact' }}
+    secondaryCTA={{ text: 'Learn About Us', href: '/about' }}
+  />
+</Base>

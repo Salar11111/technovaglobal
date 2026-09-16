@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import StatCard from '../components/ui/StatCard.astro';
+import TeamCard from '../components/ui/TeamCard.astro';
+import CTA from '../components/ui/CTA.astro';
+---
+
+<Base
+  title="About Us | TechNova Systems"
+  description="Learn about TechNova's global mission, founding story, leadership team, and R&D hubs spanning 42 countries."
+  currentPath="/about"
+>
+  <section
+    class="hero"
+    style="min-height: 50vh; padding-top: 150px;"
+    aria-labelledby="about-hero-title"
+  >
+    <div class="container reveal">
+      <span class="tag">Who We Are</span>
+      <h1 id="about-hero-title" class="gradient-text">
+        Our Global
+        <br />
+        <span>Mission</span>
+      </h1>
+      <p class="subtitle">
+        Driven by curiosity, powered by technology, and united by a vision for a smarter world.
+      </p>
+    </div>
+  </section>
+
+  <section class="about-content">
+    <div class="container">
+      <div class="glass reveal" style="padding: 4rem; margin-bottom: 4rem;">
+        <span class="tag">Our Story</span>
+        <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 1.5rem;">
+          Connecting Continents
+        </h2>
+        <p style="color: var(--color-text-dim); line-height: 1.9; font-size: 1.05rem; max-width: 820px;">
+          Founded on the principle that intelligence should be universal, TechNova Systems has grown
+          from a Silicon Valley startup to a global powerhouse operating across 42 countries. We
+          believe that technology shouldn't just solve problems—it should anticipate them. Our
+          infrastructure is the silent heartbeat of the modern economy, powering everything from
+          urban traffic systems to deep-space research.
+        </p>
+      </div>
+
+      <div style="margin-bottom: 3rem;">
+      <SectionHeader
+        tag="By the Numbers"
+        title="A Decade of Impact"
+        align="left"
+      />
+      </div>
+
+      <div class="grid-stats">
+        <StatCard icon="📅" target={2014} label="Established" delay={1} />
+        <StatCard icon="🌍" target={42} label="Countries" delay={2} class="stat-large" />
+        <StatCard icon="👨‍💻" target={12000} label="Engineers" delay={3} />
+      </div>
+
+      <!-- Team Section -->
+      <div style="margin-top: 6rem; margin-bottom: 3rem;">
+      <SectionHeader
+        tag="Leadership"
+        title="The Minds Behind TechNova"
+        description="World-class engineers, researchers, and innovators shaping the future of technology."
+      />
+      </div>
+
+      <div class="team-grid">
+        <TeamCard name="Neil Kaspar" role="Chief Executive Officer" initials="NK" delay={1} />
+        <TeamCard name="Rachel Liu" role="Chief Technology Officer" initials="RL" delay={2} />
+        <TeamCard name="Omar Abubakar" role="Head of AI Research" initials="OA" delay={3} />
+        <TeamCard name="Sofia Varma" role="VP of Global Operations" initials="SV" delay={4} />
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTA
+    tag="Join Us"
+    title="Help Build the Future"
+    description="We're always looking for brilliant minds. Explore open roles and join a team that's changing the world."
+    primaryCTA={{ text: 'Get In Touch →', href: '/contact' }}
+    secondaryCTA={{ text: 'Our Solutions', href: '/solutions' }}
+  />
+</Base>

@@ -1,0 +1,16 @@
+# TechNova Systems - Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://technova.global/sitemap-index.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 10
+
+# Disallow admin/private paths (none in static site)
+# Disallow: /api/
+# Disallow: /admin/
+
+# Host
+Host: https://technova.global

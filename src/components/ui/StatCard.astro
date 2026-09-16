@@ -1,0 +1,16 @@
+---
+interface Props {
+  icon: string;
+  target: number;
+  label: string;
+  delay?: number;
+  class?: string;
+}
+const { icon, target, label, delay = 0, class: className = '' } = Astro.props;
+const delayClass = delay ? `reveal-delay-${delay}` : '';
+---
+<div class={`stat-card glass reveal ${delayClass} ${className}`}>
+  <span class="stat-icon" aria-hidden="true">{icon}</span>
+  <h2 class="counter" data-target={target}>0</h2>
+  <p>{label}</p>
+</div>

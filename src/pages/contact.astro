@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/forms/ContactForm.tsx';
+---
+
+<Base
+  title="Contact Us | TechNova Systems"
+  description="Get in touch with TechNova Systems — request a consultation, demo, or reach our global support team."
+  currentPath="/contact"
+>
+  <section
+    class="hero"
+    style="min-height: 50vh; padding-top: 150px;"
+    aria-labelledby="contact-hero-title"
+  >
+    <div class="container reveal">
+      <span class="tag">Let's Talk</span>
+      <h1 id="contact-hero-title" class="gradient-text">
+        Let's Build the
+        <br />
+        <span>Future Together</span>
+      </h1>
+      <p class="subtitle">
+        Reach out to our global headquarters or find a local hub near you. We typically respond
+        within 24 hours.
+      </p>
+    </div>
+  </section>
+
+  <section class="contact-section" aria-labelledby="contact-form-title">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1.6fr; gap: 3rem; align-items: start; max-width: 1000px; margin: 0 auto;">
+        <!-- Contact Info -->
+        <div class="reveal">
+          <div class="glass" style="padding: 2.5rem; margin-bottom: 1.5rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;" aria-hidden="true">
+              🏢
+            </div>
+            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Global Headquarters</h4>
+            <p style="color: var(--color-text-dim); font-size: 0.9rem; line-height: 1.7;">
+              500 Tech Plaza
+              <br />
+              San Francisco, CA 94102
+              <br />
+              United States
+            </p>
+          </div>
+          <div class="glass" style="padding: 2.5rem; margin-bottom: 1.5rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;" aria-hidden="true">
+              📧
+            </div>
+            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Email Us</h4>
+            <p style="color: var(--color-text-dim); font-size: 0.9rem;">contact@technova.global</p>
+            <p style="color: var(--color-text-dim); font-size: 0.9rem;">support@technova.global</p>
+          </div>
+          <div class="glass" style="padding: 2.5rem;">
+            <div style="font-size: 2rem; margin-bottom: 1rem;" aria-hidden="true">
+              ⏰
+            </div>
+            <h4 style="font-weight: 700; margin-bottom: 0.5rem;">Always Available</h4>
+            <p style="color: var(--color-text-dim); font-size: 0.9rem; line-height: 1.7;">
+              Enterprise support is
+              <br />
+              available 24/7/365 globally.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="glass reveal reveal-delay-1" style="padding: 3.5rem;">
+          <span class="tag">Send a Message</span>
+          <h2
+            id="contact-form-title"
+            style="font-size: 1.75rem; font-weight: 700; margin-bottom: 0.5rem; margin-top: 0.5rem;"
+          >
+            Get In Touch
+          </h2>
+          <p style="color: var(--color-text-dim); font-size: 0.9rem; margin-bottom: 2.5rem;">
+            Fill out the form and our team will reach out within 24 hours.
+          </p>
+          <ContactForm client:visible />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

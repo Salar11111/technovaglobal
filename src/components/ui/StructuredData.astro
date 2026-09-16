@@ -1,0 +1,92 @@
+---
+interface Props {
+  type?: 'Organization' | 'WebSite' | 'Product' | 'Article' | 'BreadcrumbList';
+  data: Record<string, unknown>;
+}
+const { type = 'Organization', data } = Astro.props;
+
+function getSchema(type: string, data: Record<string, unknown>): Record<string, unknown> {
+  switch (type) {
+    case 'Organization':
+      return {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "TechNova Systems",
+        "url": "https://technova.global",
+        "logo": "https://technova.global/icons/icon-512.png",
+        "sameAs": [
+          "https://twitter.com/technova",
+          "https://linkedin.com/company/technova",
+          "https://github.com/technova"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+1-555-TECHNOVA",
+          "contactType": "customer service",
+          "availableLanguage": "English"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "500 Tech Plaza",
+          "addressLocality": "San Francisco",
+          "addressRegion": "CA",
+          "postalCode": "94102",
+          "addressCountry": "US"
+        }
+      };
+    case 'WebSite':
+      return {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "TechNova Systems",
+        "url": "https://technova.global",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://technova.global/search?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      };
+    case 'Product':
+      return {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Cloud",
+        ...data
+      };
+    case 'Article':
+      return {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "publisher": {
+          "@type": "Organization",
+          "name": "TechNova Systems",
+          "logo": { "@type": "ImageObject", "url": "https://technova.global/icons/icon-512.png" }
+        },
+        ...data
+      };
+    case 'BreadcrumbList': {
+      const items = (data.items as Array<{ name: string; url: string }> | undefined);
+      return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": items?.map((item, index: number) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "name": item.name,
+          "item": item.url
+        })) || []
+      };
+    }
+    default:
+      return getSchema('Organization', data);
+  }
+}
+
+const schema = getSchema(type, data);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema, null, 2)}></script>

@@ -1,0 +1,24 @@
+---
+interface Props {
+  variant?: 'primary' | 'outline' | 'glass';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  children: ReturnType<typeof Astro.slots.render>;
+  'aria-label'?: string;
+}
+const { variant = 'primary', href, type = 'button', class: className = '', children, 'aria-label': ariaLabel, ...rest } = Astro.props;
+const classes = `btn btn-${variant} ${className}`;
+---
+{href ? (
+  <a href={href} class={classes} aria-label={ariaLabel} {...rest}>
+    <slot>{children}</slot>
+  </a>
+) : (
+  <button type={type} class={classes} aria-label={ariaLabel} {...rest}>
+    <slot>{children}</slot>
+  </button>
+)}
+<style>
+  /* Styles are in global.css */
+</style>

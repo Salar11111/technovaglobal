@@ -1,0 +1,28 @@
+---
+interface Props {
+  src?: string;
+  websiteId?: string;
+  domains?: string[];
+}
+const {
+  src = import.meta.env.PUBLIC_UMAMI_SRC || 'https://cloud.umami.is/script.js',
+  websiteId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID,
+  domains = []
+} = Astro.props;
+---
+<!-- Umami Analytics -->
+{websiteId && (
+  <>
+    <script
+      defer
+      set:html={`src="${src}" data-website-id="${websiteId}" data-domains="${domains.length > 0 ? domains.join(',') : ''}" data-auto-track="true" data-do-not-track="true"`}
+    ></script>
+    <noscript>
+      <img
+        src={`${src.replace('script.js', 'collect')}?website=${websiteId}`}
+        alt=""
+        style="display:none"
+      />
+    </noscript>
+  </>
+)}
