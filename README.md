@@ -31,6 +31,12 @@ Everything is fictional: the company, the posts, the changelog, the testimonials
 
 ---
 
+## 📸 Screenshots
+
+![TechNova home page](docs/screenshots/home.jpg)
+
+---
+
 ## 🚀 Quick start
 
 Requirements: Node.js 22.12 or newer.
