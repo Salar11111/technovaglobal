@@ -9,28 +9,24 @@ export default function ThemeToggle() {
     }
     return 'system';
   });
+  const [systemDark, setSystemDark] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches
+  );
 
-  // Resolve system theme
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = () => {
-      // Theme is applied in the next effect
-    };
+    const handleChange = (event: MediaQueryListEvent) => setSystemDark(event.matches);
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [theme]);
+  }, []);
 
   // Apply theme to document
   useEffect(() => {
-    let resolved: 'dark' | 'light';
-    if (theme === 'system') {
-      resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    } else {
-      resolved = theme;
-    }
+    const resolved: 'dark' | 'light' =
+      theme === 'system' ? (systemDark ? 'dark' : 'light') : theme;
     document.documentElement.setAttribute('data-theme', resolved);
     localStorage.setItem('theme', theme);
-  }, [theme]);
+  }, [theme, systemDark]);
 
   const cycleTheme = useCallback(() => {
     setTheme(prev => {
@@ -59,25 +55,6 @@ export default function ThemeToggle() {
       className="theme-toggle"
       aria-label={`Current theme: ${themeLabels[theme]}. Click to change.`}
       title={`Theme: ${themeLabels[theme]} (click to cycle)`}
-      style={{
-        background: 'transparent',
-        border: '1px solid var(--color-glass-border)',
-        borderRadius: 'var(--radius-sm)',
-        padding: '0.5rem 0.75rem',
-        cursor: 'pointer',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.5rem',
-        color: 'var(--color-text-main)',
-        fontSize: '0.875rem',
-        transition: 'all var(--transition-fast)'
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = 'var(--color-primary)';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor = 'var(--color-glass-border)';
-      }}
     >
       <span aria-hidden="true">{themeIcons[theme]}</span>
       <span>{themeLabels[theme]}</span>
