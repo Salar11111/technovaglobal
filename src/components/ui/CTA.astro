@@ -10,7 +10,7 @@ interface Props {
 const { tag, title, description, primaryCTA, secondaryCTA, class: className = '' } = Astro.props;
 ---
 <section class={`cta-section ${className}`} aria-labelledby="cta-title">
-  <div class="container cta-box reveal">
+  <div class="container cta-box">
     <span class="tag">{tag}</span>
     <h2 id="cta-title" class="gradient-text">{title}</h2>
     <p>{description}</p>
