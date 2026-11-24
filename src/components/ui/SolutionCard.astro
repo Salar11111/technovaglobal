@@ -7,10 +7,9 @@ interface Props {
   delay?: number;
   class?: string;
 }
-const { icon, title, description, features = [], delay = 0, class: className = '' } = Astro.props;
-const delayClass = delay ? `reveal-delay-${delay}` : '';
+const { icon, title, description, features = [], class: className = '' } = Astro.props;
 ---
-<div class={`solution-card glass reveal ${delayClass} ${className}`}>
+<div class={`solution-card glass ${className}`}>
   <span class="card-icon" aria-hidden="true">{icon}</span>
   <h3>{title}</h3>
   <p>{description}</p>
