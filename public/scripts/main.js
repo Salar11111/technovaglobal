@@ -1,10 +1,12 @@
 // ===== Loading Screen =====
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 window.addEventListener('load', () => {
   const loader = document.getElementById('loading-screen');
   if (loader) {
     setTimeout(() => {
       loader.classList.add('hidden');
-    }, 1500);
+    }, prefersReducedMotion ? 0 : 500);
   }
 });
 
@@ -59,7 +61,7 @@ if (navbar) {
 
 // ===== Typed Text Effect (only on index) =====
 const typedEl = document.getElementById('typed-text');
-if (typedEl) {
+if (typedEl && !prefersReducedMotion) {
   const phrases = ['Universal Intelligence', 'AI Infrastructure', 'Quantum Security', 'Global Reach'];
   let phraseIndex = 0;
   let charIndex = 0;
@@ -98,34 +100,23 @@ function easedCounter(el, target, duration = 1800) {
     const progress = Math.min(elapsed / duration, 1);
     const easedProgress = 1 - Math.pow(1 - progress, 3);
     const value = Math.round(easedProgress * target);
-    el.textContent = value;
+    el.textContent = value.toLocaleString('en-US');
     if (progress < 1) requestAnimationFrame(update);
-    else el.textContent = target;
+    else el.textContent = target.toLocaleString('en-US');
   }
   requestAnimationFrame(update);
 }
 
-// ===== Reveal + Counter Observers (View Transitions compatible) =====
+// ===== Counter + Nav Observers (View Transitions compatible) =====
 function initObservers() {
-  // General Reveal
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-
-  document.querySelectorAll('.reveal:not(.visible)').forEach(el => revealObserver.observe(el));
-
   // Stats Counter
   const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         document.querySelectorAll('.counter').forEach(counter => {
           const target = +counter.getAttribute('data-target');
-          easedCounter(counter, target);
+          if (prefersReducedMotion) counter.textContent = target.toLocaleString('en-US');
+          else easedCounter(counter, target);
         });
         statsObserver.disconnect();
       }
