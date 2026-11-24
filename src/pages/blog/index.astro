@@ -12,7 +12,7 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.publishDate.va
   currentPath="/blog"
 >
   <section class="hero" style="min-height: 50vh; padding-top: 150px;" aria-labelledby="blog-hero-title">
-    <div class="container reveal">
+    <div class="container">
       <span class="tag">Engineering Blog</span>
       <h1 id="blog-hero-title" class="gradient-text">Insights from the<br><span>Frontier</span></h1>
       <p class="subtitle">Deep dives into our technology, architecture decisions, and the future of global infrastructure.</p>
@@ -24,7 +24,7 @@ const posts = (await getCollection('blog')).sort((a, b) => b.data.publishDate.va
       <SectionHeader tag="Latest Posts" title="Recent Articles" />
       <div class="grid-blog">
         {posts.map(post => (
-          <article class="blog-card glass reveal">
+          <article class="blog-card glass">
             {post.data.image && (
               <div class="blog-image" style={{ backgroundImage: `url(${post.data.image})` }} />
             )}
