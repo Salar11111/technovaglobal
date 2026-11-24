@@ -9,7 +9,7 @@ interface Props {
 const { tag, title, description, align = 'center', class: className = '' } = Astro.props;
 const alignClass = align === 'left' ? 'text-left' : '';
 ---
-<div class={`section-header reveal ${alignClass} ${className}`}>
+<div class={`section-header ${alignClass} ${className}`}>
   <span class="tag">{tag}</span>
   <h2 class="gradient-text">{title}</h2>
   {description && <p>{description}</p>}
