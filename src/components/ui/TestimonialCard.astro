@@ -7,10 +7,9 @@ interface Props {
   delay?: number;
   class?: string;
 }
-const { quote, author, role, avatar, delay = 0, class: className = '' } = Astro.props;
-const delayClass = delay ? `reveal-delay-${delay}` : '';
+const { quote, author, role, avatar, class: className = '' } = Astro.props;
 ---
-<div class={`testimonial-card glass reveal ${delayClass} ${className}`}>
+<div class={`testimonial-card glass ${className}`}>
   <div class="quote-mark" aria-hidden="true">"</div>
   <p>{quote}</p>
   <div class="testimonial-author">
