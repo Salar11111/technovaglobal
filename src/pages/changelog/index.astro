@@ -11,7 +11,7 @@ const entries = (await getCollection('changelog')).sort((a, b) => b.data.date.va
   currentPath="/changelog"
 >
   <section class="hero" style="min-height: 50vh; padding-top: 150px;" aria-labelledby="changelog-hero-title">
-    <div class="container reveal">
+    <div class="container">
       <span class="tag">Platform Updates</span>
       <h1 id="changelog-hero-title" class="gradient-text">Changelog</h1>
       <p class="subtitle">Every release, improvement, and fix — documented for transparency.</p>
@@ -21,7 +21,7 @@ const entries = (await getCollection('changelog')).sort((a, b) => b.data.date.va
   <section class="changelog-section">
     <div class="container">
       {entries.map(entry => (
-        <section class="changelog-entry glass reveal" id={entry.data.version}>
+        <section class="changelog-entry glass" id={entry.data.version}>
           <header class="entry-header">
             <div>
               <span class="tag">{entry.data.version}</span>
@@ -43,35 +43,42 @@ const entries = (await getCollection('changelog')).sort((a, b) => b.data.date.va
   </section>
 
   <style>
-    .changelog-section { padding: var(--space-32) 0; }
-    .changelog-entry { margin-bottom: 3rem; padding: 2.5rem; }
-    .entry-header { margin-bottom: 2rem; }
-    .entry-header .tag { margin-bottom: 0.5rem; }
-    .entry-date { color: var(--color-text-muted); font-size: 0.9rem; margin-left: 1rem; }
-    .entry-header h2 { margin-top: 0.5rem; }
-    .entry-changes { display: flex; flex-direction: column; gap: 1rem; }
+    .changelog-entry { margin-bottom: var(--s-5); padding: var(--s-6); }
+    .entry-header { margin-bottom: var(--s-5); }
+    .entry-header .tag { margin-bottom: var(--s-2); }
+    .entry-date { color: var(--muted); font-size: 0.875rem; }
+    .entry-header h2 { margin-top: var(--s-2); }
+    .entry-changes { display: flex; flex-direction: column; gap: var(--s-3); }
     .change-item {
       display: flex;
-      gap: 1rem;
-      padding: 1rem;
-      background: rgba(255,255,255,0.02);
-      border-radius: var(--radius-sm);
-      border-left: 4px solid var(--color-primary);
+      align-items: flex-start;
+      gap: var(--s-4);
+      padding: var(--s-3) var(--s-4);
+      background: var(--surface-2);
+      border: 1px solid var(--line);
+      border-left: 2px solid var(--accent);
+      border-radius: var(--r-btn);
     }
     .change-type {
-      font-size: 0.7rem;
+      font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 0.25rem 0.75rem;
-      border-radius: var(--radius-full);
+      letter-spacing: 0.06em;
+      padding: var(--s-1) var(--s-2);
+      border-radius: var(--r-full);
       white-space: nowrap;
       align-self: flex-start;
     }
-    .change-added .change-type { background: rgba(16, 185, 129, 0.2); color: #10b981; }
-    .change-changed .change-type { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
-    .change-fixed .change-type { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
-    .change-removed .change-type { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
-    .change-security .change-type { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+    .change-item p { color: var(--muted); font-size: 0.9375rem; }
+    .change-added { border-left-color: var(--ok); }
+    .change-added .change-type { background: rgba(52, 211, 153, 0.14); color: var(--ok); }
+    .change-changed { border-left-color: var(--info); }
+    .change-changed .change-type { background: var(--accent-soft); color: var(--accent); }
+    .change-fixed { border-left-color: var(--warn); }
+    .change-fixed .change-type { background: rgba(251, 191, 36, 0.14); color: var(--warn); }
+    .change-removed { border-left-color: var(--danger); }
+    .change-removed .change-type { background: rgba(251, 113, 133, 0.14); color: var(--danger); }
+    .change-security { border-left-color: var(--security); }
+    .change-security .change-type { background: rgba(34, 211, 238, 0.14); color: var(--security); }
   </style>
 </Base>
